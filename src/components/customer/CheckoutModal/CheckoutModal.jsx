@@ -74,7 +74,7 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
               </div>
               <h2 className="text-2xl font-black text-[#001B3D] uppercase">Success!</h2>
               <p className="text-gray-500 mt-3 font-medium">Thank you for choosing TEKLIY. We will contact you shortly.</p>
-              <button onClick={() => { setIsSuccess(false); onClose(); }} className="mt-8 w-full bg-[#001B3D] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#007FFF] transition-all">Close</button>
+              <button onClick={() => { setIsSuccess(false); onClose(); }} className="mt-8 w-full bg-[#001B3D] text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#007FFF] transition-all cursor-pointer">Close</button>
             </motion.div>
           </div>
         )}
@@ -92,7 +92,7 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
             exit={{ y: 100, opacity: 0 }}
             className="relative bg-white w-full max-w-[1000px] min-h-screen md:min-h-0 md:rounded-[3rem] shadow-2xl flex flex-col lg:flex-row overflow-hidden my-auto"
           >
-            <button onClick={onClose} className="absolute top-6 right-6 z-20 p-2 bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-all">
+            <button onClick={onClose} className="absolute top-6 right-6 z-20 p-2 bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-all cursor-pointer">
               <X size={20} />
             </button>
 
@@ -176,7 +176,7 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
                   </div>
                 </div>
 
-                <button disabled={loading} type="submit" className="w-full bg-[#001B3D] text-white py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#007FFF] transition-all shadow-xl shadow-blue-900/10">
+                <button disabled={loading} type="submit" className="w-full bg-[#001B3D] text-white py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#007FFF] transition-all shadow-xl shadow-blue-900/10 cursor-pointer">
                   {loading ? <Loader2 className="animate-spin" /> : <>Confirm Order <ArrowRight size={20} /></>}
                 </button>
               </form>

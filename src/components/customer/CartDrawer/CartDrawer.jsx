@@ -169,7 +169,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
 
                 <button
                   onClick={() => setIsCheckoutOpen(true)}
-                  className="group w-full bg-[#001B3D] text-white py-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#007FFF] transition-all duration-300 shadow-xl shadow-blue-900/10 active:scale-[0.98]"
+                  className="group w-full bg-[#001B3D] text-white py-5 rounded-[1.5rem] font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#007FFF] transition-all duration-300 shadow-xl shadow-blue-900/10 active:scale-[0.98] cursor-pointer"
                 >
                   Confirm Order
                   <ArrowRight
