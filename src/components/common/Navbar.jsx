@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import axios from "axios";
 import { useCart } from "@/context/CartContext";
@@ -12,6 +13,8 @@ const Navbar = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
   const { cartCount } = useCart();
 
   useEffect(() => {
@@ -26,44 +29,56 @@ const Navbar = () => {
     fetchCategories();
   }, []);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <nav className="bg-[var(--primary)] text-[var(--white)] sticky top-0 z-50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center">
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/" className="block h-14 w-32 relative">
                 <Image
-                  src="/TEKLIY.jpeg"
+                  src="/TEKLIY-2.png"
                   alt="TEKLIY Logo"
-                  width={120}
-                  height={40}
-                  className="object-contain h-10 w-auto rounded-sm brightness-110"
+                  fill
+                  priority
+                  className="object-cover rounded-md "
                 />
               </Link>
             </div>
 
             <div className="hidden lg:block flex-1 max-w-md mx-10">
-              <div className="relative">
+              <form onSubmit={handleSearch} className="relative">
                 <input
                   type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search premium gadgets..."
                   className="w-full bg-white/10 border-none rounded-full py-2.5 px-5 pl-12 text-sm focus:ring-2 focus:ring-[#007FFF] outline-none transition-all placeholder:text-gray-400 text-white"
                 />
-                <Search className="absolute left-4 top-3 text-gray-400 w-4.5 h-4.5" />
-              </div>
+                <button type="submit" className="absolute left-4 top-2.5 text-gray-400 hover:text-white transition-colors">
+                  <Search className="w-5 h-5" />
+                </button>
+              </form>
             </div>
 
             <div className="hidden md:flex items-center space-x-8 text-[15px] font-medium">
               <Link href="/" className="hover:text-[#007FFF] transition-colors">Home</Link>
-              <Link href="/products" className="hover:text-[#007FFF] transition-colors">Shop</Link>
+              <Link href="/shop" className="hover:text-[#007FFF] transition-colors">Shop</Link>
 
               <div
                 className="relative group py-7"
                 onMouseEnter={() => setIsCategoryOpen(true)}
                 onMouseLeave={() => setIsCategoryOpen(false)}
               >
-                <button className="flex items-center space-x-1 hover:text-[#007FFF] transition-colors outline-none">
+                <button className="flex items-center space-x-1 hover:text-[#007FFF] transition-colors outline-none cursor-pointer">
                   <span>Categories</span>
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isCategoryOpen ? 'rotate-180' : ''}`} />
                 </button>
@@ -73,7 +88,7 @@ const Navbar = () => {
                     categories.map((cat) => (
                       <Link
                         key={cat._id}
-                        href={`/products?category=${cat.slug || cat.name}`}
+                        href={`/shop?category=${cat.name}`}
                         className="block px-6 py-2.5 hover:bg-gray-50 hover:text-[#007FFF] transition-colors"
                       >
                         {cat.name}
@@ -123,17 +138,21 @@ const Navbar = () => {
 
         <div className={`md:hidden bg-[#001B3D] border-t border-white/10 transition-all duration-500 ease-in-out overflow-hidden ${isMenuOpen ? "max-h-[100vh] opacity-100" : "max-h-0 opacity-0"}`}>
           <div className="px-6 pt-6 pb-10 space-y-4">
-            <div className="relative mb-6">
+            <form onSubmit={handleSearch} className="relative mb-6">
               <input
                 type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search gadgets..."
                 className="w-full bg-white/10 rounded-xl py-3 px-5 pl-12 outline-none text-sm text-white"
               />
-              <Search className="absolute left-4 top-3.5 text-gray-400 w-4.5 h-4.5" />
-            </div>
+              <button type="submit" className="absolute left-4 top-3 text-gray-400">
+                <Search className="w-5 h-5" />
+              </button>
+            </form>
 
             <Link href="/" className="block text-xl font-semibold border-b border-white/5 pb-3" onClick={() => setIsMenuOpen(false)}>Home</Link>
-            <Link href="/products" className="block text-xl font-semibold border-b border-white/5 pb-3" onClick={() => setIsMenuOpen(false)}>Shop</Link>
+            <Link href="/shop" className="block text-xl font-semibold border-b border-white/5 pb-3" onClick={() => setIsMenuOpen(false)}>Shop</Link>
 
             <div>
               <button
@@ -147,9 +166,9 @@ const Navbar = () => {
                 {categories.map((cat) => (
                   <Link
                     key={cat._id}
-                    href={`/products?category=${cat.slug || cat.name}`}
+                    href={`/shop?category=${cat.name}`}
                     className="block px-6 py-2.5 text-gray-200"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => { setIsMenuOpen(false); setIsCategoryOpen(false); }}
                   >
                     {cat.name}
                   </Link>

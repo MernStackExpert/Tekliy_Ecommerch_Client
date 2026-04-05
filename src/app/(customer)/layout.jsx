@@ -12,7 +12,7 @@ export const metadata = {
   openGraph: {
     title: "TEKLIY | Premium Tech Shop",
     description: "Your ultimate destination for premium tech and gadgets.",
-    url: "https://tekliy.com", 
+    url: "https://tekliy.vercel.app", 
     siteName: "TEKLIY",
     images: [
       {
