@@ -1,9 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import { ShoppingCart, Zap, ShieldCheck, Truck, RotateCcw } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import CheckoutModal from "../CheckoutModal/CheckoutModal";
 
 const ProductInfo = ({ product }) => {
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useCart();
+
+  const singleProductData = {
+    _id: product._id,
+    name: product.name,
+    price: product.discountPrice || product.price,
+    image: product.images[0],
+    quantity: quantity
+  };
 
   return (
     <div className="flex flex-col">
@@ -45,13 +58,28 @@ const ProductInfo = ({ product }) => {
           <span className="px-6 font-bold text-[#001B3D]">{quantity}</span>
           <button onClick={() => setQuantity(q => q + 1)} className="text-2xl px-2 text-gray-400 cursor-pointer">+</button>
         </div>
-        <button className="flex-1 bg-[#001B3D] text-white rounded-xl font-bold py-4 flex items-center justify-center gap-2 hover:bg-[#007FFF] transition-all shadow-xl shadow-blue-900/10 cursor-pointer">
+        <button
+        onClick={() => addToCart(product, quantity)}
+         className="flex-1 bg-[#001B3D] text-white rounded-xl font-bold py-4 flex items-center justify-center gap-2 hover:bg-[#007FFF] transition-all shadow-xl shadow-blue-900/10 cursor-pointer">
           <ShoppingCart className="w-5 h-5" /> Add to Cart
         </button>
-        <button className="flex-1 bg-[#007FFF] text-white rounded-xl font-bold py-4 flex items-center justify-center gap-2 hover:bg-[#001B3D] transition-all shadow-xl shadow-blue-500/20 cursor-pointer">
+
+
+
+        <button
+        onClick={() => setIsCheckoutOpen(true)}
+         className="flex-1 bg-[#007FFF] text-white rounded-xl font-bold py-4 flex items-center justify-center gap-2 hover:bg-[#001B3D] transition-all shadow-xl shadow-blue-500/20 cursor-pointer">
           <Zap className="w-5 h-5" /> Buy Now
         </button>
+
+        <CheckoutModal 
+        isOpen={isCheckoutOpen} 
+        onClose={() => setIsCheckoutOpen(false)} 
+        singleProduct={singleProductData} 
+      />
       </div>
+
+
 
       {/* Trust Badges */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-gray-100 pt-8">

@@ -3,13 +3,17 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShoppingCart, Eye } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const ProductCard = ({ product }) => {
+
   const discountPercentage = product.discountPrice
     ? Math.round(
         ((product.price - product.discountPrice) / product.price) * 100,
       )
     : 0;
+
+    const { addToCart } = useCart();
 
   return (
     <div className="group relative bg-white/70 backdrop-blur-md border border-white/40 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
@@ -67,7 +71,9 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="mt-4 w-full py-2.5 bg-[#001B3D] text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#007FFF] active:scale-95 transition-all shadow-md cursor-pointer">
+        <button
+        onClick={() => addToCart(product)}
+         className="mt-4 w-full py-2.5 bg-[#001B3D] text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#007FFF] active:scale-95 transition-all shadow-md cursor-pointer">
           <ShoppingCart className="w-4 h-4" />
           <span>Add to Cart</span>
         </button>
