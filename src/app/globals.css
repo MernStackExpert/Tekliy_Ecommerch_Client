@@ -5,26 +5,26 @@
 @tailwind utilities;
 
 :root {
-  --primary: #001B3D;    /* Deep Navy Blue */
-  --secondary: #0052CC;  /* Electric Blue */
-  --accent: #4DABF7;     /* Sky Blue */
-  --surface: #F8FAFC;    /* Background Grayish White */
-  --text-dark: #1A202C;  /* Deep Charcoal Text */
+  --primary: #0047AB;   
+  --secondary: #007FFF; 
+  --accent: #E0F2FE;   
+  --bg-gradient: linear-gradient(180deg, #93C5FD 0%, #DBEAFE 40%, #EFF6FF 100%);
   --white: #FFFFFF;
 }
 
 body {
-  background-color: var(--surface);
-  color: var(--text-dark);
-  font-family: 'Inter', sans-serif; 
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: #007FFF;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-[var(--secondary)] text-white px-6 py-2 rounded-md transition-all hover:bg-[var(--primary)] active:scale-95;
-  }
-  
   .card-style {
-    @apply bg-white border border-gray-100 shadow-sm rounded-xl overflow-hidden hover:shadow-md transition-shadow;
+    @apply bg-white/70 backdrop-blur-lg border border-white/40 shadow-xl rounded-2xl overflow-hidden hover:translate-y-[-5px] transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-b from-[#3B82F6] to-[#1D4ED8] text-white px-8 py-2.5 rounded-lg font-bold shadow-lg shadow-blue-400/40 hover:brightness-110 active:scale-95 transition-all;
   }
 }
