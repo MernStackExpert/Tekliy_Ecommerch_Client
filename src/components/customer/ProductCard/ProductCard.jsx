@@ -46,7 +46,7 @@ const ProductCard = ({ product }) => {
 
       {/* Content Section */}
       <div className="p-4 flex flex-col flex-grow">
-        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
+        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1 line-clamp-1">
           {product.brand}
         </p>
         <Link href={`/product/${product.category}/${product._id}`}>

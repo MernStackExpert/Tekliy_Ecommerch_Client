@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
@@ -25,14 +26,14 @@ const HeroContent = ({ banners }) => {
   if (!banners || banners.length === 0) return null;
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 py-6">
+    <div className="max-w-[1440px] max-sm:w-full max-sm:px-0 mx-auto px-4 py-6">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
         loop={true}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
-        className="rounded-3xl overflow-hidden shadow-2xl h-[300px] md:h-[500px] lg:h-[600px]"
+        className="rounded-3xl max-sm:rounded-none overflow-hidden shadow-2xl h-[300px] md:h-[500px] lg:h-[600px]"
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={banner._id || index}>
@@ -47,19 +48,10 @@ const HeroContent = ({ banners }) => {
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
-                  className="text-3xl md:text-6xl font-black text-white leading-tight"
+                  className="text-2xl md:text-5xl font-black text-white leading-tight"
                 >
-                  {banner.title || "Next Gen Tech at TEKLIY"}
+                  {banner.title}
                 </motion.h1>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="mt-4 text-[var(--accent)] text-lg md:text-xl font-medium"
-                >
-                  Upgrade your lifestyle with our premium gadgets.
-                </motion.p>
 
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -67,9 +59,11 @@ const HeroContent = ({ banners }) => {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="mt-8"
                 >
-                  <button className="btn-primary py-3 md:py-4 px-8 md:px-10 text-lg font-bold shadow-xl">
-                    Shop Now
-                  </button>
+                  <Link href={banner.link || "/shop"}>
+                    <button className="btn-primary py-3 md:py-4 px-8 md:px-10 text-lg font-bold shadow-xl">
+                      Shop Now
+                    </button>
+                  </Link>
                 </motion.div>
               </div>
             </div>

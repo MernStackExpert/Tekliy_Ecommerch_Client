@@ -386,7 +386,7 @@ const AddProduct = () => {
             >
               <option value="">Main Category</option>
               {categories.map((cat) => (
-                <option key={cat._id} value={cat._id}>
+                <option key={cat._id} value={cat.name}>
                   {cat.name}
                 </option>
               ))}

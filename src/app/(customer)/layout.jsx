@@ -1,22 +1,31 @@
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
+import FloatingSupport from "@/components/common/FloatingSupport";
 
 export const metadata = {
   title: {
     default: "TEKLIY | Premium Tech Shop in Bangladesh",
     template: "%s | TEKLIY",
   },
-  description: "Explore the best gadgets, electronics, and tech accessories at TEKLIY. High-quality products with fast delivery across Bangladesh.",
-  keywords: ["e-commerce", "tech shop", "gadgets", "electronics", "Bangladesh", "online shopping"],
+  description:
+    "Explore the best gadgets, electronics, and tech accessories at TEKLIY. High-quality products with fast delivery across Bangladesh.",
+  keywords: [
+    "e-commerce",
+    "tech shop",
+    "gadgets",
+    "electronics",
+    "Bangladesh",
+    "online shopping",
+  ],
   authors: [{ name: "MD NIROB ISLAM" }],
   openGraph: {
     title: "TEKLIY | Premium Tech Shop",
     description: "Your ultimate destination for premium tech and gadgets.",
-    url: "https://tekliy.vercel.app", 
+    url: "https://tekliy.com",
     siteName: "TEKLIY",
     images: [
       {
-        url: "/TEKLIY.jpeg", 
+        url: "/favicon.ico",
         width: 1200,
         height: 630,
       },
@@ -38,6 +47,7 @@ export default function CustomerLayout({ children }) {
 
       <main className="flex-grow">
         {children}
+        <FloatingSupport />
       </main>
 
       <Footer />

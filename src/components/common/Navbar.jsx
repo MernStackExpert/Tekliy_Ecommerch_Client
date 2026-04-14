@@ -45,8 +45,9 @@ const Navbar = () => {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="block h-14 w-32 relative">
                 <Image
-                  src="/TEKLIY-2.png"
+                  src="/TEKLIY-3.png"
                   alt="TEKLIY Logo"
+                  
                   fill
                   priority
                   className="object-cover rounded-md "

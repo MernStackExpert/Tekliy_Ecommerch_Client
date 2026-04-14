@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import FaqAccordion from "./FaqAccordion";
+import Link from "next/link";
 
 const FaqSection = async () => {
   let faqs = [];
@@ -29,10 +30,10 @@ const FaqSection = async () => {
 
       <div className="mt-12 text-center p-8 bg-[#f0f7ff] rounded-[2rem] border border-[#007FFF]/10">
         <p className="text-[#001B3D] font-bold">Still have questions?</p>
-        <p className="text-gray-500 text-sm mt-1">Can't find the answer you're looking for? Please chat to our friendly team.</p>
-        <button className="mt-5 px-8 py-3 bg-[#001B3D] text-white rounded-xl font-bold hover:bg-[#007FFF] transition-all">
+        <p className="text-gray-500 text-sm py-5">Can't find the answer you're looking for? Please chat to our friendly team.</p>
+        <Link href="/contact" className="mt-5 px-8 py-3 bg-[#001B3D] text-white rounded-xl font-bold hover:bg-[#007FFF] transition-all ">
           Contact Us
-        </button>
+        </Link>
       </div>
     </section>
   );

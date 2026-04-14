@@ -26,7 +26,7 @@ const TopCategories = async () => {
           <div className="absolute -bottom-2 left-0 w-24 h-1.5 bg-[#007FFF] rounded-full"></div>
         </div>
         
-        <Link href="/categories" className="hidden md:flex items-center gap-2 text-[#001B3D] font-extrabold hover:text-[#007FFF] transition-all group">
+        <Link href="/shop" className="hidden md:flex items-center gap-2 text-[#001B3D] font-extrabold hover:text-[#007FFF] transition-all group">
           View All <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
@@ -67,7 +67,7 @@ const TopCategories = async () => {
       </div>
       
       <div className="md:hidden mt-6">
-        <Link href="/categories" className="w-full flex items-center justify-center py-4 bg-[#f0f7ff] text-[#007FFF] font-black rounded-2xl border-2 border-[#007FFF]/10 active:scale-95 transition-all">
+        <Link href="/shop" className="w-full flex items-center justify-center py-4 bg-[#f0f7ff] text-[#007FFF] font-black rounded-2xl border-2 border-[#007FFF]/10 active:scale-95 transition-all">
           Explore All Categories
         </Link>
       </div>

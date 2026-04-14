@@ -4,11 +4,11 @@ import ProductCard from "../ProductCard/ProductCard";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-const NewArrival = async () => {
+const FeaturedProducts = async () => {
   let productList = [];
   
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isNewArrival=true&limit=10`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isFeatured=true&limit=10`);
     productList = res.data.products || []; 
   } catch (error) {
     console.error("Error:", error.message);
@@ -21,7 +21,7 @@ const NewArrival = async () => {
       <div className="flex items-end justify-between mb-8 md:mb-14">
         <div>
           <h2 className="text-3xl md:text-6xl font-black text-[#001B3D] tracking-tighter">
-            New <span className="text-[#007FFF]">Arrivals</span>
+            Our <span className="text-[#007FFF]">Featured products</span>
           </h2>
           <div className="w-16 h-1 bg-[#007FFF] mt-2 rounded-full"></div>
         </div>
@@ -52,11 +52,11 @@ const NewArrival = async () => {
 
       <div className="md:hidden mt-4">
         <Link href="/shop" className="w-full py-3 px-3 bg-[#001B3D] text-white rounded-xl font-bold text-sm">
-          See What's New
+          See Featured Products
         </Link>
       </div>
     </section>
   );
 };
 
-export default NewArrival;
+export default FeaturedProducts;

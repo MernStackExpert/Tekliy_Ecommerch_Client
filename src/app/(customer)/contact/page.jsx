@@ -4,10 +4,10 @@ import ContactClient from "@/components/customer/Contact/ContactClient";
 
 const ContactPage = async () => {
   let shopInfo = {
-    phone: "+880 17XX-XXXXXX",
-    email: "support@tekliy.com",
-    address: "Yusufpur, Rajshahi, Bangladesh",
-    whatsapp: "017XXXXXXXX",
+    phone: "+880 1709243323",
+    email: "info.tekliy@gmail.com",
+    address: "87/899, Bibir Pukur Par Road Barishal Sadar, Barishal 8200 Bangladesh, 8200",
+    whatsapp: "+880 1709243323",
     officeTime: "Sat - Thu, 10:00 AM - 8:00 PM"
   };
 
