@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CreditCard, Loader2, CheckCircle2, ArrowRight, Truck } from "lucide-react";
+import { X, CreditCard, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -34,7 +34,11 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
     setLoading(true);
 
     const orderData = {
-      ...formData,
+      customerName: formData.customerName,
+      customerPhone: formData.customerPhone,
+      customerEmail: formData.customerEmail || "N/A",
+      whatsappNumber: formData.whatsappNumber || "N/A",
+      shippingAddress: formData.shippingAddress,
       products: itemsToOrder.map(item => ({
         productId: item._id,
         name: item.name,
@@ -46,6 +50,8 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
       deliveryCharge,
       totalAmount,
       paymentMethod: "Cash on Delivery",
+      orderStatus: "pending",
+      createdAt: new Date(),
     };
 
     try {
@@ -86,12 +92,7 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center p-0 md:p-4 overflow-y-auto bg-[#001B3D]/60 backdrop-blur-sm">
-          <motion.div 
-            initial={{ y: 100, opacity: 0 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            exit={{ y: 100, opacity: 0 }}
-            className="relative bg-white w-full max-w-[1000px] min-h-screen md:min-h-0 md:rounded-[3rem] shadow-2xl flex flex-col lg:flex-row overflow-hidden my-auto"
-          >
+          <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 100, opacity: 0 }} className="relative bg-white w-full max-w-[1000px] min-h-screen md:min-h-0 md:rounded-[3rem] shadow-2xl flex flex-col lg:flex-row overflow-hidden my-auto">
             <button onClick={onClose} className="absolute top-6 right-6 z-20 p-2 bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-full transition-all cursor-pointer">
               <X size={20} />
             </button>
@@ -160,20 +161,6 @@ const CheckoutModal = ({ isOpen, onClose, singleProduct = null }) => {
                     <span className="text-sm font-bold text-[#001B3D]">Cash on Delivery</span>
                   </div>
                   <CheckCircle2 className="text-[#007FFF]" size={20} />
-                </div>
-
-                <div className="lg:hidden bg-gray-50 p-6 rounded-3xl space-y-3">
-                  <h3 className="text-[#001B3D] font-black text-sm uppercase mb-2">Order Summary</h3>
-                  {itemsToOrder.map((item, idx) => (
-                    <div key={idx} className="flex justify-between text-xs font-medium">
-                      <span className="text-gray-500">{item.name} x {item.quantity}</span>
-                      <span className="text-[#001B3D]">৳{(item.price * item.quantity).toLocaleString()}</span>
-                    </div>
-                  ))}
-                  <div className="border-t border-gray-200 pt-3 flex justify-between items-center font-black">
-                    <span className="text-sm text-[#001B3D] uppercase">Total</span>
-                    <span className="text-xl text-[#007FFF]">৳{totalAmount.toLocaleString()}</span>
-                  </div>
                 </div>
 
                 <button disabled={loading} type="submit" className="w-full bg-[#001B3D] text-white py-5 rounded-2xl font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#007FFF] transition-all shadow-xl shadow-blue-900/10 cursor-pointer">
